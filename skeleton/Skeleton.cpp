@@ -11,7 +11,23 @@ namespace {
     SkeletonPass() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {
-      errs() << "I saw a function called " << F.getName() << "!\n";
+      errs() << "In a function called " << F.getName() << "!\n";
+
+      errs() << "Function body:\n";
+      //F.dump(); Out-of-Date: no more dump support in modern llvm unless you enable it at compile time.
+      F.print(llvm::errs());
+
+      for (auto &B : F) {
+        errs() << "Basic block:\n" << B;
+        errs() << "\n";
+        for (auto &I : B) {
+          errs() << "Instruction: \n" << I;
+          errs() << "\n";
+        }
+        errs() << "\n";
+      }
+      errs() << "\n";
+
       return false;
     }
   };
