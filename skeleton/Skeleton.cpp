@@ -18,15 +18,15 @@ namespace {
       F.print(llvm::errs());
 
       for (auto &B : F) {
-        errs() << "Basic block:\n";
-        B.print(llvm::errs(), true);
-
+        errs() << "Basic block:\n" << B;
+        errs() << "\n";
         for (auto &I : B) {
-          errs() << "Instruction: \n";
-          I.print(llvm::errs(), true);
+          errs() << "Instruction: \n" << I;
           errs() << "\n";
         }
+        errs() << "\n";
       }
+      errs() << "\n";
 
       return false;
     }
